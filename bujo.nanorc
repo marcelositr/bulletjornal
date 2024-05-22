@@ -1,0 +1,84 @@
+## Marcar cores para arquivos do bujo.
+## Cores das tarefas primeiro para que o símbolo seja sempre colorido
+## palavras-chave depois para que mantenham a cor
+## comentários por último para que tudo seja colorido
+
+## visão geral de regex
+## '^' é o início da linha
+## '$' é o final da linha
+## '[[:digit:]]' é um número
+## '[[:alpha:]]' é uma letra
+## '.' é curinga
+## '*' 0 ou mais do caractere anterior
+## '+' 1 ou mais do caractere anterior
+## veja 'man grep' para mais informações
+syntax "bujo" "\.?bujo$"
+comment "//"
+
+# Reunião listada primeiro para que as tarefas possam ser colocadas nelas e sejam 'coloridas' corretamente
+# 1 Transforma o M e a primeira palavra em vermelho para assumir erro
+color red start="^M " end=" "
+
+# 2 formato de data torna-se verde, se não for encontrado, permanece vermelho
+icolor green "^M[[:space:]]*([[:digit:]][[:digit:]]-[[:digit:]][[:digit:]]-[[:digit:]][[:digit:]][[:digit:]][[:digit:]])[[:space:]]*[[:digit:]][[:digit:]][[:digit:]][[:digit:]]"
+
+# 3 torna o 'M' em verde claro independentemente
+icolor brightgreen "^M\>"
+
+# tarefa importante
+color brightyellow "! .*"
+
+# tarefa
+color brightred "^\* "
+color brightred " \* "
+
+# tarefa de baixa prioridade
+color magenta "\*l"
+# explorar
+color cyan "^\? .*$"
+#email a ser respondido
+icolor green "^@"
+
+# Destaca um contato
+icolor magenta "@[[:alpha:]]*\>"
+# Destaca um email
+icolor brightmagenta "\<([[:alnum:]]|-)*@([[:alnum:]]|-|\.)*\>"
+
+# Migrado para frente
+color black ">>.*"
+color brightblack ">>"
+
+# encaminhamento de agendamento
+color brightblack ">>>.*$"
+color red "^>>>"
+color green "^>>>([[:digit:]][[:digit:]]-[[:digit:]][[:digit:]]-[[:digit:]][[:digit:]][[:digit:]][[:digit:]])>>>"
+
+# delegado
+#color cyan start="<<" end="<<"
+color brightblack "<<.*$"
+color cyan "^<<.*<<"
+
+# Tarefas completadas
+color brightblack "^x.*"
+color brightblack "^X.*"
+color brightblack "\<x .*"
+color brightblack "\<X .*"
+color black "CX.*"
+color brightblack "CX"
+
+# Destaca Datas
+color brightgreen start="===" end="==="
+
+# Comentários
+color brightblack "(^|[[:space:]]+)#.*$"
+#color brightblue "^[[:space:]]*##.*$"
+
+# Não utilizado, salvo para exemplo
+# String
+color white "".+"([[:space:]]|$)"
+
+# comentário multilinha
+#color yellow start="\{" end="\}"
+
+# strings (sem tratamento multilinha ainda)
+#color brightblack ""[^\"]*""
