@@ -5,37 +5,45 @@
 #
 #         USAGE: bujo
 #
-#   DESCRIPTION: Este é um script Bash que implementa um Bullet Journal digital.
-#                Ele usa símbolos simples para categorizar itens em  uma  lista,
-#                como  tarefas  importantes,  normais,  de   baixa   prioridade,
-#                reuniões e e-mails. O  script  oferece  opções  para  editar  o
-#                Bullet Journal, começar um  novo  dia,  exibir  um  resumo  das
-#                tarefas pendentes e migrar tarefas para o próximo  dia.  É  uma
-#                ferramenta simples e útil para organização pessoal.
+#   DESCRIPTION: Bash Script for a digital Bullet Journal
+#                Script Bash para um Bullet Journal digital
 #
-#       OPTIONS: -h para ajuda
+#       OPTIONS: -h for help
+#                -h para ajuda
 #  REQUIREMENTS: bash, nano
 #          BUGS: n/a
 #         NOTES: n/a
 #        AUTHOR: marcelositr - marcelost@riseup.net
-#       CREATED: 01/05/2024
+#       CREATED: 2024/05/01
 #       VERSION: 0.01
 #      REVISION: n/a
-#       CREDITS: nicholai.best@gmail.com
+#       CREDITS: file bujo.nanorc by nicholai.best@gmail.com
 #
 #===============================================================================
 
-make_example_file(){
-    # Cria um arquivo em /tmp para edição que contém exemplos básicos
-    # da sintaxe bujo
-    cat << eof > /tmp/example.bujo
+# Constants
+# Constantes
+
+TODO_FILE="$HOME/.bujo/todo.bujo"
+DAILY_FILE="$HOME/.bujo/daily.bujo"
+TEMP_FILE="/tmp/today.bujo"
+MIGRATION_FILE="/tmp/Migration.bujo"
+
+# Functions
+# Funções
+
+# Creates a temporary example file to demonstrate Bujo syntax
+# Cria um arquivo de exemplo temporário para demonstrar a sintaxe do Bujo
+
+create_example_file() {
+    cat << EOF > /tmp/example.bujo
 --------------------------------------------------------------------------------
 		Bujo arquivo de demonstração
 --------------------------------------------------------------------------------
 Este é um arquivo de exemplo para o formato de bullet journal  para  nano.  Este
 exemplo é um arquivo temporário e não será alterado,  então  sinta-se à  vontade
 para experimentar.  Na  próxima  vez  que  'bujo -x'  for  executado,  todas  as
-informações encontradas aqui serão as mesmas.  
+informações encontradas aqui serão as mesmas.
 
 Tentou os seguintes exercícios onde você vê: "---EXPERIMENTE---"
 
@@ -79,10 +87,10 @@ Faça-me importante, isso você quer cuidar em breve!
 Eu sou uma ideia... leia-me mais tarde
 Eu não sou uma tarefa importante
 
-Há também uma cor de reunião usando o 'M' no início 
+Há também uma cor de reunião usando o 'M' no início
 de uma linha com ou sem data, mais sobre isso depois...
-M 01-01-2020 Café com o dave
-M Café com o dave
+M 01-01-2020 Café com o Dave
+M Café com o Dave
 
 --------------------------------------------------------------------------------
 		Concluindo ou Cancelando tarefas
@@ -97,14 +105,14 @@ X * exemplo de tarefa concluída
 ! Complete-me também!
 
 Se uma tarefa  ou  evento  não  acontecer  ou  não  for  necessário,  você  pode
-cancelá-lo. Use "CX" para mostrar que uma tarefa foi cancelada.  Coloque um "CX"
+cancelá-lo. Use "C" para mostrar que uma tarefa foi cancelada.  Coloque um "CX"
 na frente da linha para vê-la desaparecer.
 
 ---EXPERIMENTE---
 * Eu não preciso ser feito, cancele-me e veja o que acontece!
 
 A linha acima desaparece, mas não é excluída, apenas oculta.  Se  você  precisar
-lê-la, exclua o 'C' para revelá-la.
+lê-la, exclua o 'X' para revelá-la.
 
 ---EXPERIMENTE---
 CX * Nada muito importante, mas agora você sabe e eu não era uma distração
@@ -121,7 +129,7 @@ Funciona nas seguintes 3 etapas:
 Etapa 1. E-mail precisa ser composto
 É assim que você denota que precisa enviar um e-mail para alguém Coloque o  nome
 primeiro com o sinal "arroba", o verde permite que você saiba que é  um  e-mail.
-Coloque qualquer tarefa depois disso, pode ser de alta prioridade ou normal.  
+Coloque qualquer tarefa depois disso, pode ser de alta prioridade ou normal.
 
 @JohnD * Você tem uvas?
 ou
@@ -142,8 +150,8 @@ Ex3. X @JohnD * Você tem uvas? - ele não tem
 
 ---EXPERIMENTE---
 Edite abaixo para mostrar que  você  precisa  enviar  um  e-mail  para  Nancy  e
-perguntar sobre laranjas.  Depois de editá-lo, veja  como  ele  comenta  @Nome *
-conteúdo do email
+perguntar   sobre   laranjas.   Depois  de   editá-lo,  veja  como  ele  comenta
+@Nome *conteúdo do email
 
 --------------------------------------------------------------------------------
 		Migração
@@ -193,11 +201,11 @@ acima como migradas para que você saiba que as adiou por um dia.
 Apenas algumas tarefas serão migradas para frente, bujo  mostrará  um  lista  de
 quaisquer tarefas que sejam deixadas incompletas se forem:
 * tarefas normais
-e ! tarefas importantes 
+e ! tarefas importantes
 
 Essas tarefas não são copiadas para frente:
-*l baixa prioridade 
-e ?: explorar 
+*l baixa prioridade
+e ?: explorar
 
 3) Por último, Bujo adicionará suas "Tarefas diárias" à  sua  lista.  Estas  são
 tarefas que você precisa fazer todos os  dias.  A  lista  pode  ser  editada  em
@@ -207,7 +215,8 @@ tarefas que você precisa fazer todos os  dias.  A  lista  pode  ser  editada  e
 		Agendamento e Reuniões
 
 Agendar tarefas é bom quando você tem coisas que não precisam atenção  até  mais
-tarde.  Marque a data na frente da tarefa usando usando o formato >>>DD-MM-AAAA>>>.
+tarde.    Marque    a    data    na   frente   da   tarefa   usando   usando   o
+formato >>>DD-MM-AAAA>>>.
 >>>01-05-2024>>> * Isso não precisa ser feito por enquanto!
 
 Isso irá acinzentar a tarefa, mas mostrar que ela está por vir em algum momento.
@@ -227,301 +236,206 @@ Isso irá copiar para frente na data listada,  mas  você  ainda  pode  fazer  u
 reunião no dia sem data.
 M Clube da Luta
 
-NOTA: Se a data não estiver em DD-MM-AAAA, 
-nunca avançará 
+NOTA: Se a data não estiver em DD-MM-AAAA,
+nunca avançará
 --------------------------------------------------------------------------------
 
 Agora que você concluiu o tutorial, execute para começar a listar!
-
-eof
-
+EOF
 }
 
-print_help(){
-#Imprime texto de ajuda
-	echo "Opção inválida -$OPTARG" >&2
-    cat << eof
+# Displays the help text
+# Exibe o texto de ajuda
+
+show_help() {
+    cat << EOF
 Uso: bujo.sh [OPÇÃO]
 use sem opção para abrir o diário
 
- -n	começar novo dia e migração
- -M	migra todas as tarefas
-
- -s	exibir resumo
- -a	exibir todas as tarefas
-
- -i	exibir ! tarefas
- -t	exibir * tarefas
- -l	exibir *l tarefas e migra-las
- -m	exibir reuniões
- -E	exibir coisas para serem exploradas
- -e	exibir emails
-
- -d	editar tarefas diárias
- -x	abrir tutorial de exemplo
- -b	bujo -b 'tarefa' adiciona tarefa sem abrir nano
-
- -h	ajuda
-eof
-
+ -n    começar novo dia e migração
+ -M    migrar todas as tarefas
+ -s    exibir resumo
+ -a    exibir todas as tarefas
+ -i    exibir tarefas importantes
+ -t    exibir tarefas normais
+ -l    exibir e migrar tarefas de baixa prioridade
+ -m    exibir reuniões
+ -E    exibir itens exploratórios
+ -e    exibir emails
+ -d    editar tarefas diárias
+ -x    abrir tutorial de exemplo
+ -b    bujo -b 'tarefa' adiciona tarefa sem abrir nano
+ -h    ajuda
+EOF
 }
 
+start_new_day() {
+    echo "Iniciando novo dia..."
+    migrate_tasks
+    add_daily_tasks
+    open_todo_file
+}
 
-new_day(){
-# Comece um novo dia de trabalho, migre tarefas antigas e adicione diárias
-# Copie para frente todas as tarefas não concluídas para o final do arquivo todo
-    MASTERLIST="$HOME/.bujo/todo.bujo"
-	echo "Iniciando novo dia..."
-	sleep .2
-	echo "Migrando tarefas não concluídas..."
-	sleep .2
-	# faça um novo arquivo /tmp/Migration.bujo
-	# encontre todas as tarefas importantes em todo, anexe-as a um arquivo tmp
-	{
-       	echo "# === Itens migrados ==="
-       	echo "# Editar ou remover item que você precisa alterar"
-    	echo "# Linhas com início '#' são ignoradas"
-       	echo "# concluir ou mudar para uma tarefa normal"
-    	grep '^* ' "$MASTERLIST" |sort -d
-    	grep '^@'  "$MASTERLIST" |sort -d
-    	grep "^M $(date +%d-%m-%Y)" "$MASTERLIST" |sort -d
-    	grep ">>>$(date +%d-%m-%Y)>>>" "$MASTERLIST" |sort -d
-        # se algum item importante nos permitir saber que eles devem ser tratados
-        if grep -q  '^! ' "$MASTERLIST" ;then
-       	    echo "! --- Itens importantes deixados na lista --- !!!(Exclua-me)"
-       	    echo "# Triagem de itens abaixo para normal ou conclusão em breve"
-    	    grep '^! ' "$MASTERLIST" |sort -d
+# Generates the migration file
+# Gera o arquivo de migração
+
+migrate_tasks() {
+    echo "Migrando tarefas não concluídas..."
+    sleep 0.2
+    {
+        echo "# === Itens migrados ==="
+        echo "# Editar ou remover item que você precisa alterar"
+        grep '^* ' "$TODO_FILE" | sort
+        grep '^@'  "$TODO_FILE" | sort
+        grep "^M $(date +%d/%m/%Y)" "$TODO_FILE" | sort
+        grep ">>>$(date +%d/%m/%Y)>>>" "$TODO_FILE" | sort
+        if grep -q '^! ' "$TODO_FILE"; then
+            echo "! --- Itens importantes deixados na lista --- !!!(Exclua-me)"
+            grep '^! ' "$TODO_FILE" | sort
         fi
+    } >> "$MIGRATION_FILE"
 
-    } >> /tmp/Migration.bujo
-	# Abra o arquivo de migração para revisão
-	nano /tmp/Migration.bujo
+    nano "$MIGRATION_FILE"
 
-	#migrar todas as tarefas deixadas por fazer antes de hoje, marcá-las com >> para acinzentá-las
-	sed -i 's/^* />>* /' "$MASTERLIST"
-	sed -i 's/^! />>! /' "$MASTERLIST"
-	sed -i 's/^@/>>@/' "$MASTERLIST"
+# Marks tasks as migrated
+# Marca tarefas como migradas
 
-	# Adicionar nova data ao arquivo todo principal
+    mark_tasks_as_migrated
+
+# Adds new date and migrated items to the main file
+# Adiciona nova data e itens migrados ao arquivo principal
+
     {
-    	echo -n "===$(date +%d-%m-%Y)"
-    	echo "==="
-    	#Copiar itens migratórios para todo.bujo
-    	grep -vE "^#" /tmp/Migration.bujo
-    	#copiar tarefas diárias para o arquivo todo
-    	grep -vE "^#"  ~/.bujo/daily.bujo
-    } >> "$MASTERLIST"
-	rm /tmp/Migration.bujo
-	#abrir arquivo todo
-	nano +9999 "$MASTERLIST"
-#	~/.bujo/todo.bujo
+        echo "===$(date +%d/%m/%Y)==="
+        grep -vE "^#" "$MIGRATION_FILE"
+    } >> "$TODO_FILE"
+
+    rm "$MIGRATION_FILE"
 }
 
-print_all(){
-#Imprime todas as listas
-	echo "Tarefas Importantes:"
-	tput setaf 1
-	tput bold
-	grep '^! '  ~/.bujo/todo.bujo
-	echo
-	tput setaf 3
-	echo "Tarefas:"
-	grep '^* '  ~/.bujo/todo.bujo
-	echo
-	tput setaf 5
-	echo "Reuniões:"
-	grep '^M'  ~/.bujo/todo.bujo|sort
-	echo
-	tput setaf 7
-	tput sgr0
-	echo "Baixa Prioridade:"
-	grep '^*l '  ~/.bujo/todo.bujo
-	echo
-	echo "Tarefas Futuras:"
-	grep "^>>>" ~/.bujo/todo.bujo
+mark_tasks_as_migrated() {
+    sed -i 's/^* />>* /' "$TODO_FILE"
+    sed -i 's/^! />>! /' "$TODO_FILE"
+    sed -i 's/^@/>>@/' "$TODO_FILE"
 }
 
-print_summary(){
-#imprime a visão geral de quantos itens são devidos
-	echo "Resumo $(date +%d-%m-%Y):"
-    if [ "$(grep -c "^M $(date +%d-%m-%Y)" "$HOME/.bujo/todo.bujo")" -gt 0 ];then
-    	echo "Reuniões:"
-    	grep "^M $(date +%d-%m-%Y)" ~/.bujo/todo.bujo
-    else
-        echo Nenhuma reunião hoje.
-    fi
+add_daily_tasks() {
+    grep -vE "^#" "$DAILY_FILE" >> "$TODO_FILE"
+}
+
+print_all_tasks() {
+    echo "Tarefas Importantes:"
+    tput setaf 1; tput bold
+    grep '^! ' "$TODO_FILE"; echo
+    tput setaf 3
+    echo "Tarefas:"
+    grep '^* ' "$TODO_FILE"; echo
+    tput setaf 5
+    echo "Reuniões:"
+    grep '^M' "$TODO_FILE" | sort; echo
+    tput setaf 7; tput sgr0
+    echo "Baixa Prioridade:"
+    grep '^*l ' "$TODO_FILE"; echo
+    echo "Tarefas Futuras:"
+    grep "^>>>" "$TODO_FILE"
+}
+
+print_summary() {
+    echo "Resumo $(date +%d/%m/%Y):"
+    print_meetings_for_today
     echo
-	tput setaf 1
-	tput bold
-	echo "Tarefas importantes e devidas:"
-	grep ">>>$(date +%d-%m-%Y)>>>" ~/.bujo/todo.bujo
-	grep ">>>$(date +%d-%m-%Y --date='1 day')>>>" ~/.bujo/todo.bujo
-	grep ">>>$(date +%d-%m-%Y --date='2 day')>>>" ~/.bujo/todo.bujo
-	grep ">>>$(date +%d-%m-%Y --date='3 day')>>>" ~/.bujo/todo.bujo
-	grep "^! " ~/.bujo/todo.bujo
-	tput setaf 7
-	tput sgr0
+    tput setaf 1; tput bold
+    echo "Tarefas importantes e devidas:"
+    grep ">>>$(date +%d/%m/%Y)>>>" "$TODO_FILE"
+    grep ">>>$(date +%d/%m/%Y --date='1 day')>>>" "$TODO_FILE"
+    grep ">>>$(date +%d/%m/%Y --date='2 day')>>>" "$TODO_FILE"
+    grep ">>>$(date +%d/%m/%Y --date='3 day')>>>" "$TODO_FILE"
+    grep "^! " "$TODO_FILE"
+    tput setaf 7; tput sgr0
     echo "Outro:"
-	lines=$(grep -c '^* ' ~/.bujo/todo.bujo |sort -d)
-	echo "$lines tarefa(s)"
-
-	lines=$(grep -c '^*l ' ~/.bujo/todo.bujo |sort -d)
-	echo "$lines baixa prioridade"
-	echo
-
+    echo "$(grep -c '^* ' "$TODO_FILE") tarefa(s)"
+    echo "$(grep -c '^*l ' "$TODO_FILE") baixa prioridade"
+    echo
     echo "Reuniões + 7 dias:"
-    grep "^M $(date +%d-%m-%Y --date='1 day')" ~/.bujo/todo.bujo
-    grep "^M $(date +%d-%m-%Y --date='2 day')" ~/.bujo/todo.bujo
-    grep "^M $(date +%d-%m-%Y --date='3 day')" ~/.bujo/todo.bujo
-    grep "^M $(date +%d-%m-%Y --date='4 day')" ~/.bujo/todo.bujo
-    grep "^M $(date +%d-%m-%Y --date='5 day')" ~/.bujo/todo.bujo
-    grep "^M $(date +%d-%m-%Y --date='6 day')" ~/.bujo/todo.bujo
-    grep "^M $(date +%d-%m-%Y --date='7 day')" ~/.bujo/todo.bujo
-
-# senão exemplo
-
+    for i in {1..7}; do
+        grep "^M $(date +%d/%m/%Y --date="${i} day")" "$TODO_FILE"
+    done
 }
 
-migrate(){
-# empurra tudo para baixo, classificando por tarefa
-	# pegue tudo depois do último '==='
-	tac ~/.bujo/todo.bujo | awk '!flag; /===/{flag = 1};' | tac > /tmp/today.bujo
+print_meetings_for_today() {
+    if grep -q "^M $(date +%d/%m/%Y)" "$TODO_FILE"; then
+        echo "Reuniões:"
+        grep "^M $(date +%d/%m/%Y)" "$TODO_FILE"
+    else
+        echo "Nenhuma reunião hoje."
+    fi
+}
 
-	#pegar tarefas e adicionar a um novo arquivo
+# Migrates all pending tasks
+# Migra todas as tarefas pendentes
+
+migrate_all_tasks() {
+    tac "$TODO_FILE" | awk '!flag; /===/{flag = 1};' | tac > "$TEMP_FILE"
+
     {
-    	grep '^! '  /tmp/today.bujo |sort -d
-    	grep '^* '  /tmp/today.bujo |sort -d
-    	grep '^@'   /tmp/today.bujo |sort -d
-    	grep '^M ' /tmp/today.bujo |sort -d
-    	grep "^>>>" /tmp/today.bujo |sort -d
-	} >>/tmp/today1.bujo
+        grep '^! '  "$TEMP_FILE" | sort
+        grep '^* '  "$TEMP_FILE" | sort
+        grep '^@'   "$TEMP_FILE" | sort
+        grep '^M '  "$TEMP_FILE" | sort
+        grep "^>>>" "$TEMP_FILE" | sort
+    } >> "/tmp/today1.bujo"
 
-	#marcá-los como migrados no primeiro arquivo
-	sed -i 's/^* />>* /' /tmp/today.bujo
-	sed -i 's/^! />>! /' /tmp/today.bujo
-	sed -i 's/^@/>>@/'  /tmp/today.bujo
-	sed -i 's/^M/>>M/'  /tmp/today.bujo
-	# adicione o arquivo 2 ao arquivo 1 agora ordene por tarefa
+    mark_tasks_as_migrated
+    echo '====classificado===' >> "$TEMP_FILE"
+    cat "/tmp/today1.bujo" >> "$TEMP_FILE"
 
-	echo '====classificado===' >> /tmp/today.bujo
-	cat /tmp/today1.bujo >> /tmp/today.bujo
+    tac "$TODO_FILE" | sed '1,/===/d' | tac > "/tmp/tmp1.bujo"
+    cat "/tmp/tmp1.bujo" > "$TODO_FILE"
+    cat "$TEMP_FILE" >> "$TODO_FILE"
 
-	# Edite hoje
-    # nano /tmp/today.bujo
-	# copie apenas tudo antes do último '===' para um arquivo tmp
-	# sobrescrever fazendo todo e adicionar dia recém-editado
-	tac ~/.bujo/todo.bujo |sed '1,/===/d'|tac > /tmp/tmp1.bujo
-	cat /tmp/tmp1.bujo > ~/.bujo/todo.bujo
-	cat /tmp/today.bujo >> ~/.bujo/todo.bujo
-	#remover arquivos tmp
-	rm /tmp/today.bujo
-	rm /tmp/today1.bujo
-	rm /tmp/tmp1.bujo
-
-	#mover tarefas de baixa prioridade e exploratórias de toda a lista de tarefas para o final da lista
-	# colocar em um arquivo tmp
-	grep '^*l ' ~/.bujo/todo.bujo|sort -d > /tmp/bujotmp
-	grep '^? ' ~/.bujo/todo.bujo|sort -d >> /tmp/bujotmp
-	#remover entradas de cima e anexar arquivo tmp à lista de tarefas
-	sed -i 's/^*l />>*l /' ~/.bujo/todo.bujo
-	sed -i 's/^? />>? /' ~/.bujo/todo.bujo
-	cat /tmp/bujotmp >>  ~/.bujo/todo.bujo
-	rm /tmp/bujotmp
-
-	nano +9999 ~/.bujo/todo.bujo
+    rm "$TEMP_FILE" "/tmp/today1.bujo" "/tmp/tmp1.bujo"
+    migrate_low_priority_and_exploratory_tasks
 }
+
+migrate_low_priority_and_exploratory_tasks() {
+    grep '^*l ' "$TODO_FILE" | sort > "/tmp/bujotmp"
+    grep '^? ' "$TODO_FILE" | sort >> "/tmp/bujotmp"
+    sed -i 's/^*l />>*l /' "$TODO_FILE"
+    sed -i 's/^? />>? /' "$TODO_FILE"
+    cat "/tmp/bujotmp" >> "$TODO_FILE"
+    rm "/tmp/bujotmp"
+}
+
+open_todo_file() {
+    nano +9999 "$TODO_FILE"
+}
+
+# Calls the main function to start the script
+# Chama a função principal para iniciar o script
 
 if [ -n "$1" ]; then
-	while getopts "baitlnEmMxHdes" opt; do
-	  case $opt in
-	    n)
-		new_day
-	    ;;
-	    b)
-		echo "$2" >> ~/.bujo/todo.bujo
-	    ;;
-	    i)
-		grep '^! ' ~/.bujo/todo.bujo|sort -d
-	    ;;
-	    t)
-		grep '^* ' ~/.bujo/todo.bujo|sort -d
-	    ;;
-	    l)
-		# imprimir tarefas de baixa prioridade e migrá-las
-		grep '^*l ' ~/.bujo/todo.bujo|sort -d
-		# colocar em um arquivo tmp
-		grep '^*l ' ~/.bujo/todo.bujo|sort -d > /tmp/bujotmp
-		#remover entradas de cima e anexar arquivo tmp à lista de tarefas
-		sed -i 's/^*l />>*l /' ~/.bujo/todo.bujo
-		cat /tmp/bujotmp >>  ~/.bujo/todo.bujo
-		rm /tmp/bujotmp
-	    ;;
-	    m)
-		grep '^M ' ~/.bujo/todo.bujo|sort -d
-	    ;;
-	    e)
-		grep '^@' ~/.bujo/todo.bujo|sort -d
-	    ;;
-	    E)
-		grep '^?' ~/.bujo/todo.bujo|sort -d
-	    ;;
-	    a)
-    		print_all
-	    ;;
-	    H)
-    		nano +9999 ~/.bujo/todo.bujo
-	    ;;
-	    d)
-    		echo "Editando Lista Diária..."
-    		sleep 1
-    		nano  ~/.bujo/daily.bujo
-	    ;;
-	    x)
-    		make_example_file
-    		nano /tmp/example.bujo
-    		rm /tmp/example.bujo
-	    ;;
-	    s)
-    		print_summary
-	    ;;
-	    M)
-    		migrate
-	    ;;
-	    \?)
-    		print_help
-	    ;;
-	  esac
-	done
+    while getopts "baitlnEmMxHdes" opt; do
+        case $opt in
+            n) start_new_day ;;
+            b) echo "$2" >> "$TODO_FILE" ;;
+            i) grep '^! ' "$TODO_FILE" | sort ;;
+            t) grep '^* ' "$TODO_FILE" | sort ;;
+            l) 
+                grep '^*l ' "$TODO_FILE" | sort
+                migrate_low_priority_and_exploratory_tasks
+                ;;
+            m) grep '^M ' "$TODO_FILE" | sort ;;
+            e) grep '^@' "$TODO_FILE" | sort ;;
+            E) grep '^?' "$TODO_FILE" | sort ;;
+            a) print_all_tasks ;;
+            H) open_todo_file ;;
+            d) nano "$DAILY_FILE" ;;
+            x) create_example_file; nano /tmp/example.bujo; rm /tmp/example.bujo ;;
+            s) print_summary ;;
+            M) migrate_all_tasks ;;
+            *) show_help ;;
+        esac
+    done
 else
-	# pegue tudo depois do último '===' em todo e coloque em um arquivo, este é o último dia de tarefas
-	tac ~/.bujo/todo.bujo | awk '!flag; /===/{flag = 1};' | tac > /tmp/today.bujo
-	# Edite 'hoje'
-	nano /tmp/today.bujo
-	# copie apenas tudo antes do último '===' para um arquivo tmp
-	# sobrescrever fazendo todo e adicionar dia recém-editado
-	tac ~/.bujo/todo.bujo |sed '1,/===/d'|tac > /tmp/tmp1.bujo
-	cat /tmp/tmp1.bujo > ~/.bujo/todo.bujo
-	cat /tmp/today.bujo >> ~/.bujo/todo.bujo
-	#remover arquivos tmp
-	rm /tmp/today.bujo
-	rm /tmp/tmp1.bujo
+    nano +9999 "$TODO_FILE"
 fi
-
-#subcommand=$1; shift  # Remova 'pip' da lista de argumentos
-#case "$subcommand" in
-# Analise as opções para o subcomando de instalação
-#  tarefa)
-#	echo -n "* " >> ~/.bujo/todo.bujo # Remova 'instalar' da lista de argumentos
-#	echo $@ >> ~/.bujo/todo.bujo # Remova 'instalar' da lista de argumentos
-#	echo "Tarefa adicionada:"$@
-#	;;
-#  resumo)
-#	print_summary
-#	;;
-#  todos)
-#	print_all
-#	;;
-#  novo-dia)
-#	new_day
-#  ;;
-#esac
