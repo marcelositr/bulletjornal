@@ -18,7 +18,7 @@ Download the file from the repository and run the following commands or read the
 2. Clone the repository.
 3. Enter the bujo directory.
 4. Run the install script.
-5. Place the bujo.nanorc file, if not with root permissions:
+5. Place the bujo.nanorc file if you do not give permissions to sudo during installation:
    `sudo cp bujo.nanorc /usr/share/nano`
 
 ---
@@ -87,7 +87,7 @@ Baixe o arquivo do repositório e execute os seguintes comandos ou leia o arquiv
 2. Clone o repositório.
 3. Entre no diretório bujo.
 4. Execute o script de instalação.
-5. Coloque o arquivo bujo.nanorc, caso não de permissões para root:
+5. Coloque o arquivo bujo.nanorc, caso não de permissões para sudo durante a instalação:
    `sudo cp bujo.nanorc /usr/share/nano`
 
 ---
