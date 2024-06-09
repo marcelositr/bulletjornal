@@ -264,7 +264,7 @@ use sem opção para abrir o diário
  -e    exibir emails
  -d    editar tarefas diárias
  -x    abrir tutorial de exemplo
- -b    bujo -b 'tarefa' adiciona tarefa sem abrir nano
+ -b    bujo -b "tarefa" adiciona tarefa sem abrir nano
  -h    ajuda
 EOF
 }
