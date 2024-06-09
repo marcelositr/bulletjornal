@@ -61,7 +61,7 @@ Usage: bujo.sh [OPTION]
 
 - `-d` edit daily tasks
 - `-x` open example format
-- `-b` bujo -b [task] add task without opening nano
+- `-b` bujo -b "task" add task without opening nano
 
 - `-h` display help
 
@@ -130,6 +130,6 @@ Uso: bujo.sh [OPÇÃO]
 
 - `-d` editar tarefas diárias
 - `-x` abrir formato de exemplo
-- `-b` bujo -b [tarefa] adicionar tarefa sem abrir o nano
+- `-b` bujo -b "tarefa" adicionar tarefa sem abrir o nano
 
 - `-h` exibir ajuda
