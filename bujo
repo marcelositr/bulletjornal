@@ -216,8 +216,8 @@ tarefas que você precisa fazer todos os  dias.  A  lista  pode  ser  editada  e
 
 Agendar tarefas é bom quando você tem coisas que não precisam atenção  até  mais
 tarde.    Marque    a    data    na   frente   da   tarefa   usando   usando   o
-formato >>>DD-MM-AAAA>>>.
->>>01-05-2024>>> * Isso não precisa ser feito por enquanto!
+formato >>>DD/MM/AAAA>>>.
+>>>01/05/2024>>> * Isso não precisa ser feito por enquanto!
 
 Isso irá acinzentar a tarefa, mas mostrar que ela está por vir em algum momento.
 Na data listada, a tarefa será copiada para sua lista de migração quando você
@@ -230,13 +230,13 @@ Tente migrar isso para a data de amanhã.
 
 A reunião também pode ser migrada em uma data  específica  usando  este  sintaxe
 semelhante:
-M 19-02-2021 Clube da Luta
+M 19/02/2021 Clube da Luta
 
 Isso irá copiar para frente na data listada,  mas  você  ainda  pode  fazer  uma
 reunião no dia sem data.
 M Clube da Luta
 
-NOTA: Se a data não estiver em DD-MM-AAAA,
+NOTA: Se a data não estiver em DD/MM/AAAA,
 nunca avançará
 --------------------------------------------------------------------------------
 
