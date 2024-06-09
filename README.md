@@ -113,21 +113,21 @@ Alguns dos símbolos para codificar em cores listas 'bujo'. Muitos outros estão
 
 Uso: bujo.sh [OPÇÃO]
 
-`-n` começar novo dia e migração
-`-M` migrar todas as tarefas
+- `-n` começar novo dia e migração
+- `-M` migrar todas as tarefas
 
-`-s` exibir sumário
-`-a` exibir todas as tarefas
+- `-s` exibir sumário
+- `-a` exibir todas as tarefas
 
-`-i` exibir tarefas importantes
-`-t` exibir tarefas concluídas
-`-l` exibir tarefas concluídas e migrá-las
-`-m` exibir reuniões
-`-E` exibir coisas a serem exploradas
-`-e` exibir e-mails
+- `-i` exibir tarefas importantes
+- `-t` exibir tarefas concluídas
+- `-l` exibir tarefas concluídas e migrá-las
+- `-m` exibir reuniões
+- `-E` exibir coisas a serem exploradas
+- `-e` exibir e-mails
 
-`-d` editar tarefas diárias
-`-x` abrir formato de exemplo
-`-b` bujo -b [tarefa] adicionar tarefa sem abrir o nano
+- `-d` editar tarefas diárias
+- `-x` abrir formato de exemplo
+- `-b` bujo -b [tarefa] adicionar tarefa sem abrir o nano
 
-`-h` exibir ajuda
+- `-h` exibir ajuda
