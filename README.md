@@ -3,6 +3,7 @@ _Uma ferramenta minimalista e eficiente para organizar seu dia a dia diretamente
 
 ![Licença](https://img.shields.io/badge/license-GPL--3.0-blue.svg)
 ![Shell](https://img.shields.io/badge/Shell-Bash-blue)
+[![Wiki](https://img.shields.io/badge/Project-Wiki-blueviolet.svg)](https://github.com/marcelositr/bulletjornal/wiki)
 
 `bujo` é um sistema de Bullet Journal para o terminal, implementado como um script Bash. Ele utiliza o editor `nano` com uma sintaxe de cores customizada para transformar um simples arquivo de texto em um poderoso painel de produtividade. Foi criado para quem ama a simplicidade e a velocidade do terminal e quer uma ferramenta de organização que não atrapalhe seu fluxo de trabalho.
 
