@@ -1,135 +1,90 @@
-# Bullet Journal (bujo)
+# bujo - Seu Bullet Journal no Terminal
+_Uma ferramenta minimalista e eficiente para organizar seu dia a dia diretamente da linha de comando._
 
-A traditional bullet journal is essentially a syntax used in a notebook to track daily items and see your progress at a glance. 'bujo' consists of a nano syntax file and a simple bash script with some support files. It is designed to be a basic digital equivalent of a bullet journal for the terminal. Using a very minimalist markup syntax, it color-codes items based on the symbol at the beginning of a line, just like the traditional paper version. The script can also migrate tasks and meetings based on the date.
+![Licença](https://img.shields.io/badge/license-GPL--3.0-blue.svg)
+![Shell](https://img.shields.io/badge/Shell-Bash-blue)
 
----
-
-## Dependencies
-
-- nano
+`bujo` é um sistema de Bullet Journal para o terminal, implementado como um script Bash. Ele utiliza o editor `nano` com uma sintaxe de cores customizada para transformar um simples arquivo de texto em um poderoso painel de produtividade. Foi criado para quem ama a simplicidade e a velocidade do terminal e quer uma ferramenta de organização que não atrapalhe seu fluxo de trabalho.
 
 ---
 
-## Installation
+### Demonstração
 
-Download the file from the repository and run the following commands or read the install.sh file and place the files manually.
+*(**Dica:** Grave um pequeno GIF usando uma ferramenta como `asciinema` ou `termtoscreen` e substitua a imagem abaixo. Mostre a criação de uma tarefa, a conclusão dela com 'X', e o uso do comando `bujo -s` para ver o resumo.)*
 
-1. Install nano if your system doesn't have it.
-2. Clone the repository.
-3. Enter the bujo directory.
-4. Run the install script.
-5. Place the bujo.nanorc file if you do not give permissions to sudo during installation:
-   `sudo cp bujo.nanorc /usr/share/nano`
+![Demonstração do bujo](https://raw.githubusercontent.com/marcelositr/bulletjornal/main/img/bujo.gif)
 
 ---
 
-## Getting Started
+### ✨ Principais Funcionalidades
 
-After installation, run the command `bujo -x` to execute the tutorial program. It will guide the user through the syntax and how it is used. The 'bujo' script will open a continuous 'todo.bujo' file that will serve as a daily journal. If the bujo.nanorc file is installed, it will color-code any *.bujo file on the system. This can be useful if you need 'todo' lists in different directories to keep track of files.
-
----
-
-## Syntax Overview
-
-Some of the symbols for color-coding 'bujo' lists. Many more are available if you check the tutorial.
-
-- Normal task
-- Important task
-- Meetings
-- Emails
-- Completed task
-- Canceled task
+*   **Minimalista e Focado:** Sem distrações, sem interfaces gráficas pesadas. Apenas você, seu terminal e suas tarefas.
+*   **Sintaxe Visual com Cores:** Identifique rapidamente tarefas importantes (`!`), concluídas (`X`), reuniões (`M`) e mais, graças a um sistema de cores intuitivo no `nano`.
+*   **Migração Inteligente de Tarefas:** Com o comando `bujo -n`, suas tarefas pendentes são automaticamente movidas para o dia atual, garantindo que nada seja esquecido.
+*   **Baseado em Arquivos de Texto:** Seus dados são seus, para sempre. Todos os seus registros ficam em arquivos de texto simples, fáceis de ler, fazer backup e versionar com Git.
+*   **Customizável:** Defina suas próprias tarefas de rotina no arquivo `daily.bujo` para criar hábitos e automatizar o planejamento do seu dia.
+*   **Leve e Rápido:** Escrito em Bash, o `bujo` é extremamente rápido e não consome quase nenhum recurso do sistema.
 
 ---
 
-## Help
+### 🚀 Instalação
 
-Usage: bujo.sh [OPTION]
+A instalação é simples e automatizada. Abra seu terminal e execute os seguintes comandos:
 
-- `-n` start new day and migration
-- `-M` migrate all tasks
+```bash
+# 1. Clone o repositório
+git clone https://github.com/marcelositr/bulletjornal.git
 
-- `-s` display summary
-- `-a` display all tasks
+# 2. Entre no diretório
+cd bulletjornal
 
-- `-i` display important tasks
-- `-t` display completed tasks
-- `-l` display completed tasks and migrate them
-- `-m` display meetings
-- `-E` display things to explore
-- `-e` display emails
+# 3. Execute o script de instalação (ele pedirá sua senha)
+./install.sh
+```
 
-- `-d` edit daily tasks
-- `-x` open example format
-- `-b` bujo -b "task" add task without opening nano
-
-- `-h` display help
+➡️ Para instruções detalhadas, pré-requisitos e solução de problemas, consulte a página de **[Instalação na Wiki](https://github.com/marcelositr/bulletjornal/wiki/Instalação)**.
 
 ---
 
-# Bullet Journal (bujo)
+### 📖 Uso Básico
 
-Um bullet journal tradicional é basicamente uma sintaxe usada em um caderno para acompanhar itens diários e ver seu progresso de relance. 'bujo' consiste em um arquivo de sintaxe nano e um script bash simples com alguns arquivos de suporte. É projetado para ser um equivalente digital básico de um bullet journal para terminal. Usando uma sintaxe de marcação muito minimalista, ele codifica em cores itens com base no símbolo no início de uma linha, assim como a versão de papel tradicional. O script também pode migrar tarefas e reuniões com base na data.
+Após a instalação, você pode começar a usar o `bujo` imediatamente.
 
----
+```bash
+# Abra seu diário principal para adicionar e editar tarefas
+bujo
 
-## Dependências
+# Execute o tutorial interativo para aprender a sintaxe
+bujo -x
 
-- nano
+# Comece um novo dia, migrando tarefas pendentes
+bujo -n
+```
 
----
-
-## Instalação
-
-Baixe o arquivo do repositório e execute os seguintes comandos ou leia o arquivo install.sh e coloque os arquivos manualmente.
-
-1. Instale o nano se o seu sistema não tiver.
-2. Clone o repositório.
-3. Entre no diretório bujo.
-4. Execute o script de instalação.
-5. Coloque o arquivo bujo.nanorc, caso não de permissões para sudo durante a instalação:
-   `sudo cp bujo.nanorc /usr/share/nano`
+➡️ Para um guia completo de como usar a ferramenta, acesse o **[Guia de Início Rápido](https://github.com/marcelositr/bulletjornal/wiki/Guia-de-Início-Rápido)** e a **[Referência de Comandos](https://github.com/marcelositr/bulletjornal/wiki/Referência-de-Comandos-(Opções))** na nossa Wiki.
 
 ---
 
-## Iniciando
+### 📚 Documentação Completa (Wiki)
 
-Após instalado, execute o comando `bujo -x` para executar o programa de tutorial. Ele guiará o usuário através da sintaxe e como ela é usada. O script 'bujo' abrirá um arquivo contínuo 'todo.bujo' que servirá como um diário diário. Se o arquivo bujo.nanorc estiver instalado, ele codificará em cores qualquer arquivo *.bujo no sistema. Isso pode ser útil se você precisar de listas de 'todo' em diferentes diretórios para acompanhar arquivos.
+Toda a documentação do projeto está na nossa Wiki. Ela é a sua principal fonte de consulta para dominar o `bujo`.
 
----
-
-## Visão geral da sintaxe
-
-Alguns dos símbolos para codificar em cores listas 'bujo'. Muitos outros estão disponíveis se você conferir o tutorial.
-
-- Tarefa normal
-- Tarefa importante
-- Reuniões
-- Emails
-- Tarefa completada
-- Tarefa cancelada
+*   **[Guia de Início Rápido](https://github.com/marcelositr/bulletjornal/wiki/Guia-de-Início-Rápido)**
+*   **[Referência de Sintaxe](https://github.com/marcelositr/bulletjornal/wiki/Referência-de-Sintaxe)**
+*   **[Referência de Comandos](https://github.com/marcelositr/bulletjornal/wiki/Referência-de-Comandos-(Opções))**
+*   **[Exemplos e Casos de Uso](https://github.com/marcelositr/bulletjornal/wiki/Exemplos-e-Casos-de-Uso)**
+*   **[Customização](https://github.com/marcelositr/bulletjornal/wiki/Customização)**
+*   **[FAQ - Perguntas Frequentes](https://github.com/marcelositr/bulletjornal/wiki/FAQ---Perguntas-Frequentes)**
 
 ---
 
-## Ajuda
+### 🤝 Como Contribuir
 
-Uso: bujo.sh [OPÇÃO]
+Sugestões, relatórios de bugs e *pull requests* são muito bem-vindos! Sinta-se à vontade para **abrir uma issue** para discutir novas ideias ou relatar um problema.
 
-- `-n` começar novo dia e migração
-- `-M` migrar todas as tarefas
+### 📜 Licença
 
-- `-s` exibir sumário
-- `-a` exibir todas as tarefas
+Este projeto é licenciado sob a **GNU General Public License v3.0**. Veja o arquivo [LICENSE](LICENSE.txt) para mais detalhes.
 
-- `-i` exibir tarefas importantes
-- `-t` exibir tarefas concluídas
-- `-l` exibir tarefas concluídas e migrá-las
-- `-m` exibir reuniões
-- `-E` exibir coisas a serem exploradas
-- `-e` exibir e-mails
-
-- `-d` editar tarefas diárias
-- `-x` abrir formato de exemplo
-- `-b` bujo -b "tarefa" adicionar tarefa sem abrir o nano
-
-- `-h` exibir ajuda
+---
+Created by [@marcelositr](https://github.com/marcelositr)
