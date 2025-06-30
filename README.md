@@ -5,6 +5,18 @@ _Uma ferramenta minimalista e eficiente para organizar seu dia a dia diretamente
 ![Shell](https://img.shields.io/badge/Shell-Bash-blue)
 [![Wiki](https://img.shields.io/badge/Project-Wiki-blueviolet.svg)](https://github.com/marcelositr/bulletjornal/wiki)
 
+![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)
+![Shell](https://img.shields.io/badge/Shell-Bash-blue)
+![Status](https://img.shields.io/badge/status-Em%20desenvolvimento-yellow)
+![Feito com](https://img.shields.io/badge/feito%20com-%F0%9F%92%BB%20%2B%20%F0%9F%A4%96-critical)
+
+[![Último commit](https://img.shields.io/github/last-commit/marcelositr/bulletjornal)](https://github.com/marcelositr/bulletjornal/commits/main)
+[![Releases](https://img.shields.io/github/v/release/marcelositr/bulletjornal?label=release)](https://github.com/marcelositr/bulletjornal/releases)
+[![Issues](https://img.shields.io/github/issues/marcelositr/bulletjornal)](https://github.com/marcelositr/bulletjornal/issues)
+[![Stars](https://img.shields.io/github/stars/marcelositr/bulletjornal?style=social)](https://github.com/marcelositr/bulletjornal/stargazers)
+[![Wiki](https://img.shields.io/badge/Documentação-Wiki-blueviolet)](https://github.com/marcelositr/bulletjornal/wiki)
+
+
 `bujo` é um sistema de Bullet Journal para o terminal, implementado como um script Bash. Ele utiliza o editor `nano` com uma sintaxe de cores customizada para transformar um simples arquivo de texto em um poderoso painel de produtividade. Foi criado para quem ama a simplicidade e a velocidade do terminal e quer uma ferramenta de organização que não atrapalhe seu fluxo de trabalho.
 
 ![Gemini Shell Banner](https://github.com/marcelositr/bulletjornal/blob/main/images/bujo.png?raw=true)
