@@ -1,10 +1,6 @@
 # bujo - Seu Bullet Journal no Terminal
 _Uma ferramenta minimalista e eficiente para organizar seu dia a dia diretamente da linha de comando._
 
-![Licença](https://img.shields.io/badge/license-GPL--3.0-blue.svg)
-![Shell](https://img.shields.io/badge/Shell-Bash-blue)
-[![Wiki](https://img.shields.io/badge/Project-Wiki-blueviolet.svg)](https://github.com/marcelositr/bulletjornal/wiki)
-
 ![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)
 ![Shell](https://img.shields.io/badge/Shell-Bash-blue)
 ![Status](https://img.shields.io/badge/status-Em%20desenvolvimento-yellow)
