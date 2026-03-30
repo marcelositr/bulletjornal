@@ -1,99 +1,95 @@
-# bujo - Seu Bullet Journal no Terminal
-_Uma ferramenta minimalista e eficiente para organizar seu dia a dia diretamente da linha de comando._
+# 📒 Bullet Journal (bujo) - C++ Edition
 
-![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)
-![Shell](https://img.shields.io/badge/Shell-Bash-blue)
-![Status](https://img.shields.io/badge/status-Em%20desenvolvimento-yellow)
-![Feito com](https://img.shields.io/badge/feito%20com-%F0%9F%92%BB%20%2B%20%F0%9F%A4%96-critical)
+[![C++](https://img.shields.io/badge/C++-17-blue.svg)](https://isocpp.org/)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
 
-[![Último commit](https://img.shields.io/github/last-commit/marcelositr/bulletjornal)](https://github.com/marcelositr/bulletjornal/commits/main)
-[![Releases](https://img.shields.io/github/v/release/marcelositr/bulletjornal?label=release)](https://github.com/marcelositr/bulletjornal/releases)
-[![Issues](https://img.shields.io/github/issues/marcelositr/bulletjornal)](https://github.com/marcelositr/bulletjornal/issues)
-[![Stars](https://img.shields.io/github/stars/marcelositr/bulletjornal?style=social)](https://github.com/marcelositr/bulletjornal/stargazers)
-[![Wiki](https://img.shields.io/badge/Documentação-Wiki-blueviolet)](https://github.com/marcelositr/bulletjornal/wiki)
-
-
-`bujo` é um sistema de Bullet Journal para o terminal, implementado como um script Bash. Ele utiliza o editor `nano` com uma sintaxe de cores customizada para transformar um simples arquivo de texto em um poderoso painel de produtividade. Foi criado para quem ama a simplicidade e a velocidade do terminal e quer uma ferramenta de organização que não atrapalhe seu fluxo de trabalho.
-
-![Gemini Shell Banner](https://github.com/marcelositr/bulletjornal/blob/main/images/bujo.png?raw=true)
-
-### Demonstração
-
-*(**Dica:** Grave um pequeno GIF usando uma ferramenta como `asciinema` ou `termtoscreen` e substitua a imagem abaixo. Mostre a criação de uma tarefa, a conclusão dela com 'X', e o uso do comando `bujo -s` para ver o resumo.)*
-
-![Demonstração do bujo](https://raw.githubusercontent.com/marcelositr/bulletjornal/main/img/bujo.gif)
+Uma ferramenta minimalista e poderosa para organização pessoal diretamente no terminal, reescrita em **C++** para garantir robustez, modularidade e performance. O `bujo` combina a simplicidade de arquivos de texto com a flexibilidade do editor `nano` e um sistema inteligente de migração de tarefas.
 
 ---
 
-### ✨ Principais Funcionalidades
+## 🚀 Destaques
 
-*   **Minimalista e Focado:** Sem distrações, sem interfaces gráficas pesadas. Apenas você, seu terminal e suas tarefas.
-*   **Sintaxe Visual com Cores:** Identifique rapidamente tarefas importantes (`!`), concluídas (`X`), reuniões (`M`) e mais, graças a um sistema de cores intuitivo no `nano`.
-*   **Migração Inteligente de Tarefas:** Com o comando `bujo -n`, suas tarefas pendentes são automaticamente movidas para o dia atual, garantindo que nada seja esquecido.
-*   **Baseado em Arquivos de Texto:** Seus dados são seus, para sempre. Todos os seus registros ficam em arquivos de texto simples, fáceis de ler, fazer backup e versionar com Git.
-*   **Customizável:** Defina suas próprias tarefas de rotina no arquivo `daily.bujo` para criar hábitos e automatizar o planejamento do seu dia.
-*   **Leve e Rápido:** Escrito em Bash, o `bujo` é extremamente rápido e não consome quase nenhum recurso do sistema.
+- **Puro Terminal:** Sem interfaces pesadas, focado 100% em produtividade CLI.
+- **Sintaxe Visual:** Realce de cores customizado para o `nano`, permitindo identificar instantaneamente o status das tarefas.
+- **Migração Automática:** Nunca perca uma tarefa pendente. O sistema move seus itens importantes para o novo dia com um comando.
+- **Arquitetura POO:** Desenvolvido seguindo princípios SOLID, DRY e Clean Code.
+- **Privacidade Total:** Seus dados são salvos localmente em arquivos `.bujo` no diretório `~/.bujo/`.
 
 ---
 
-### 🚀 Instalação
+## 🛠️ Instalação e Compilação
 
-A instalação é simples e automatizada. Abra seu terminal e execute os seguintes comandos:
+### Pré-requisitos
+- Compilador C++ (suporte a C++17)
+- `make`
+- Editor `nano`
 
+### Compilando
 ```bash
-# 1. Clone o repositório
+# Clone o repositório
 git clone https://github.com/marcelositr/bulletjornal.git
-
-# 2. Entre no diretório
 cd bulletjornal
 
-# 3. Execute o script de instalação (ele pedirá sua senha)
-./install.sh
+# Compile o binário
+make
+
+# Opcional: Execute os testes unitários
+make test
 ```
 
-➡️ Para instruções detalhadas, pré-requisitos e solução de problemas, consulte a página de **[Instalação na Wiki](https://github.com/marcelositr/bulletjornal/wiki/Instalação)**.
-
----
-
-### 📖 Uso Básico
-
-Após a instalação, você pode começar a usar o `bujo` imediatamente.
+### Configurando o Realce de Sintaxe
+Para ativar as cores no `nano`, o sistema gera automaticamente um arquivo em `~/.config/nano/nano-syntax.nanorc`. Certifique-se de incluí-lo no seu `~/.nanorc`:
 
 ```bash
-# Abra seu diário principal para adicionar e editar tarefas
-bujo
-
-# Execute o tutorial interativo para aprender a sintaxe
-bujo -x
-
-# Comece um novo dia, migrando tarefas pendentes
-bujo -n
+echo 'include "~/.config/nano/nano-syntax.nanorc"' >> ~/.nanorc
 ```
 
-➡️ Para um guia completo de como usar a ferramenta, acesse o **[Guia de Início Rápido](https://github.com/marcelositr/bulletjornal/wiki/Guia-de-Início-Rápido)** e a **[Referência de Comandos](https://github.com/marcelositr/bulletjornal/wiki/Referência-de-Comandos-(Opções))** na nossa Wiki.
+---
+
+## 📖 Guia de Uso Rápido
+
+O `bujo` pode ser usado de forma interativa ou via argumentos de linha de comando:
+
+- `./bulletjornal`: Abre o menu principal interativo.
+- `./bulletjornal -n`: Inicia um novo dia e migra tarefas pendentes.
+- `./bulletjornal -s`: Exibe um resumo rápido das notas atuais.
+- `./bulletjornal -h`: Exibe a ajuda.
+
+### Sintaxe de Tarefas
+- `* Tarefa`: Tarefa normal.
+- `! Tarefa`: Tarefa importante/urgente.
+- `M Reunião`: Compromisso ou reunião.
+- `X * Tarefa`: Marcar como concluída.
+- `>> * Tarefa`: Tarefa migrada para outro dia.
 
 ---
 
-### 📚 Documentação Completa (Wiki)
+## 📚 Documentação Completa (Wiki)
 
-Toda a documentação do projeto está na nossa Wiki. Ela é a sua principal fonte de consulta para dominar o `bujo`.
+Para detalhes profundos sobre a lógica de migração, customização de categorias e fluxos de trabalho avançados, visite nossa **[Wiki oficial](https://github.com/marcelositr/bulletjornal/wiki)**.
 
-*   **[Guia de Início Rápido](https://github.com/marcelositr/bulletjornal/wiki/Guia-de-Início-Rápido)**
-*   **[Referência de Sintaxe](https://github.com/marcelositr/bulletjornal/wiki/Referência-de-Sintaxe)**
-*   **[Referência de Comandos](https://github.com/marcelositr/bulletjornal/wiki/Referência-de-Comandos-(Opções))**
-*   **[Exemplos e Casos de Uso](https://github.com/marcelositr/bulletjornal/wiki/Exemplos-e-Casos-de-Uso)**
-*   **[Customização](https://github.com/marcelositr/bulletjornal/wiki/Customização)**
-*   **[FAQ - Perguntas Frequentes](https://github.com/marcelositr/bulletjornal/wiki/FAQ---Perguntas-Frequentes)**
+- **[Guia de Instalação Detalhado](https://github.com/marcelositr/bulletjornal/wiki/Instalacao)**
+- **[Referência de Sintaxe](https://github.com/marcelositr/bulletjornal/wiki/Sintaxe)**
+- **[Fluxo de Trabalho de Migração](https://github.com/marcelositr/bulletjornal/wiki/Migracao)**
 
 ---
 
-### 🤝 Como Contribuir
+## 🤝 Contribuindo
 
-Sugestões, relatórios de bugs e *pull requests* são muito bem-vindos! Sinta-se à vontade para **abrir uma issue** para discutir novas ideias ou relatar um problema.
+Contribuições são o que tornam a comunidade open source um lugar incrível para aprender, inspirar e criar. Qualquer contribuição que você fizer será **muito apreciada**.
 
-### 📜 Licença
-
-Este projeto é licenciado sob a **GNU General Public License v3.0**. Veja o arquivo [LICENSE](LICENSE.txt) para mais detalhes.
+1. Faça um Fork do projeto
+2. Crie sua Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a Branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
 ---
-Created by [@marcelositr](https://github.com/marcelositr)
+
+## 📜 Licença
+
+Distribuído sob a licença **GPLv3**. Veja o arquivo `LICENSE` para mais informações.
+
+---
+Desenvolvido por [marcelositr](https://github.com/marcelositr)
