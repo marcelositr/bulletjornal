@@ -1,4 +1,4 @@
-# 📒 Bullet Journal (bujo) - C++ Edition
+# Bullet Journal (bujo) - C++ Edition
 
 [![C++](https://img.shields.io/badge/C++-17-blue.svg)](https://isocpp.org/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -8,7 +8,7 @@ Uma ferramenta minimalista e poderosa para organização pessoal diretamente no 
 
 ---
 
-## 🚀 Destaques
+## Destaques
 
 - **Puro Terminal:** Sem interfaces pesadas, focado 100% em produtividade CLI.
 - **Sintaxe Visual:** Realce de cores customizado para o `nano`, permitindo identificar instantaneamente o status das tarefas.
@@ -18,7 +18,7 @@ Uma ferramenta minimalista e poderosa para organização pessoal diretamente no 
 
 ---
 
-## 🛠️ Instalação e Compilação
+## Instalação e Compilação
 
 ### Pré-requisitos
 - Compilador C++ (suporte a C++17)
@@ -65,7 +65,7 @@ O `bujo` pode ser usado de forma interativa ou via argumentos de linha de comand
 
 ---
 
-## 📚 Documentação Completa (Wiki)
+## Documentação Completa (Wiki)
 
 Para detalhes profundos sobre a lógica de migração, customização de categorias e fluxos de trabalho avançados, visite nossa **[Wiki oficial](https://github.com/marcelositr/bulletjornal/wiki)**.
 
@@ -75,7 +75,7 @@ Para detalhes profundos sobre a lógica de migração, customização de categor
 
 ---
 
-## 🤝 Contribuindo
+## Contribuindo
 
 Contribuições são o que tornam a comunidade open source um lugar incrível para aprender, inspirar e criar. Qualquer contribuição que você fizer será **muito apreciada**.
 
@@ -87,7 +87,7 @@ Contribuições são o que tornam a comunidade open source um lugar incrível pa
 
 ---
 
-## 📜 Licença
+## Licença
 
 Distribuído sob a licença **GPLv3**. Veja o arquivo `LICENSE` para mais informações.
 
